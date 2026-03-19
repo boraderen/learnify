@@ -1,2 +1,6 @@
 /.idea
 .DS_Store
+__pycache__/
+*.pyc
+computation_graph_demo.svg
+.ipynb_checkpoints/

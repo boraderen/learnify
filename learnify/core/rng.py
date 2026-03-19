@@ -1,26 +1,55 @@
-# learnify/core/rng.py
+"""Independent RNG helpers built on NumPy's Generator."""
+
+from __future__ import annotations
+
+from collections.abc import Sequence
+
 import numpy as np
 
-# private RNG instance
-_rng = np.random.default_rng()
+_generator = np.random.default_rng()
 
-def seed(s: int):
-    """Set the seed for reproducibility."""
-    global _rng
-    _rng = np.random.default_rng(s)
 
-def rand(*shape):
-    """Uniform random numbers in [0, 1]"""
-    return _rng.random(shape)
+def seed(value: int | None) -> None:
+    """Reset Learnify's internal generator."""
 
-def normal(loc=0.0, scale=1.0, size=None):
-    """Draw samples from a normal (Gaussian) distribution."""
-    return _rng.normal(loc, scale, size)
+    global _generator
+    _generator = np.random.default_rng(value)
 
-def choice(a, size=None, replace=True, p=None):
-    """Randomly choose elements from a sequence or array."""
-    return _rng.choice(a, size=size, replace=replace, p=p)
 
-def integers(low, high=None, size=None):
-    """Random integers from low (inclusive) to high (exclusive)."""
-    return _rng.integers(low, high=high, size=size)
+def rand(*shape: int) -> np.ndarray:
+    """Return samples from U[0, 1) with NumPy-like shape semantics."""
+
+    if not shape:
+        return _generator.random()
+    return _generator.random(shape)
+
+
+def normal(
+    loc: float = 0.0,
+    scale: float = 1.0,
+    size: int | Sequence[int] | None = None,
+) -> np.ndarray:
+    """Return normally distributed samples."""
+
+    return _generator.normal(loc=loc, scale=scale, size=size)
+
+
+def integers(
+    low: int,
+    high: int | None = None,
+    size: int | Sequence[int] | None = None,
+) -> np.ndarray:
+    """Return random integers in the half-open interval [low, high)."""
+
+    return _generator.integers(low, high=high, size=size)
+
+
+def choice(
+    a: int | Sequence[int] | np.ndarray,
+    size: int | Sequence[int] | None = None,
+    replace: bool = True,
+    p: Sequence[float] | np.ndarray | None = None,
+) -> np.ndarray:
+    """Sample from a sequence or integer range."""
+
+    return _generator.choice(a, size=size, replace=replace, p=p)
