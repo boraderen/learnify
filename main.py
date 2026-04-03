@@ -6,7 +6,7 @@ from learnify import MLP, Value, computation_graph_svg
 
 
 def main() -> None:
-    x1 = Value(2.0, label="x1")
+    x1 = Value(4.0, label="x1")
     x2 = Value(-3.0, label="x2")
     score = ((x1 * x2) + 4.0).tanh()
     score.label = "score"
