@@ -3,27 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Learnify API Docs</title>
+    <title>Learnify API Overview</title>
     <meta
       name="description"
-      content="Static API documentation for Learnify, a from-scratch machine learning and deep learning library built with raw Python and NumPy."
+      content="Minimal API overview for Learnify, a from-scratch machine learning and deep learning library built with raw Python and NumPy."
     />
     <style>
       :root {
-        --bg: #f6f3ea;
-        --bg-strong: #efe7d4;
-        --surface: rgba(255, 252, 245, 0.84);
-        --surface-strong: #fffaf0;
-        --text: #1d2a30;
-        --muted: #55656d;
-        --line: rgba(29, 42, 48, 0.12);
-        --accent: #0f766e;
-        --accent-strong: #155e75;
-        --accent-soft: rgba(15, 118, 110, 0.12);
-        --code-bg: #132229;
-        --code-text: #eefbf9;
-        --shadow: 0 20px 60px rgba(34, 49, 56, 0.12);
-        --radius: 22px;
+        --paper: #ffffff;
+        --ink: #1f1d18;
+        --muted: #666053;
+        --rule: #ddd6c9;
+        --code-bg: #ffffff;
+        --code-border: #d8d2c6;
+        --inline-bg: #f8f6f1;
+        --tok-key: #1d4ed8;
+        --tok-type: #0f766e;
+        --tok-call: #9a3412;
+        --tok-mod: #0f766e;
+        --tok-param: #374151;
+        --tok-str: #166534;
+        --tok-num: #b45309;
+        --tok-comment: #6b7280;
       }
 
       * {
@@ -36,29 +37,67 @@
 
       body {
         margin: 0;
-        color: var(--text);
-        background:
-          radial-gradient(circle at top right, rgba(21, 94, 117, 0.16), transparent 32rem),
-          radial-gradient(circle at top left, rgba(217, 119, 6, 0.12), transparent 28rem),
-          linear-gradient(180deg, #fbf7ee 0%, #f4efe3 100%);
-        font-family: "Avenir Next", "Trebuchet MS", "Segoe UI", sans-serif;
-        line-height: 1.6;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 18px;
+        line-height: 1.7;
       }
 
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        background-image:
-          linear-gradient(rgba(29, 42, 48, 0.03) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(29, 42, 48, 0.03) 1px, transparent 1px);
-        background-size: 30px 30px;
-        mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.28), transparent 78%);
+      main {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 56px 24px 76px;
+      }
+
+      header {
+        margin-bottom: 44px;
+      }
+
+      section {
+        margin-top: 36px;
+        padding-top: 28px;
+        border-top: 1px solid var(--rule);
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0 0 12px;
+        font-weight: normal;
+        line-height: 1.16;
+      }
+
+      h1 {
+        font-size: clamp(2.8rem, 7vw, 4.5rem);
+      }
+
+      h2 {
+        font-size: 2rem;
+      }
+
+      h3 {
+        margin-top: 26px;
+        font-size: 1.28rem;
+      }
+
+      p {
+        margin: 0 0 14px;
+      }
+
+      ul {
+        margin: 8px 0 18px 24px;
+        padding: 0;
+      }
+
+      li {
+        margin: 5px 0;
       }
 
       a {
-        color: var(--accent-strong);
+        color: inherit;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
       }
 
       code,
@@ -66,629 +105,503 @@
         font-family: "SFMono-Regular", Menlo, Consolas, monospace;
       }
 
-      .shell {
-        max-width: 1180px;
-        margin: 0 auto;
-        padding: 32px 20px 72px;
+      code {
+        padding: 0.08em 0.28em;
+        background: var(--inline-bg);
+        color: var(--ink);
+        font-size: 0.92em;
       }
 
-      .hero {
-        position: relative;
-        overflow: hidden;
-        padding: 32px;
-        border: 1px solid var(--line);
-        border-radius: 30px;
-        background:
-          linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(255, 250, 240, 0.78)),
-          linear-gradient(135deg, rgba(15, 118, 110, 0.1), rgba(21, 94, 117, 0.04));
-        box-shadow: var(--shadow);
-      }
-
-      .hero::after {
-        content: "";
-        position: absolute;
-        right: -90px;
-        top: -90px;
-        width: 240px;
-        height: 240px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(15, 118, 110, 0.16), transparent 70%);
-      }
-
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        margin: 0 0 16px;
-        padding: 7px 12px;
-        border-radius: 999px;
-        background: var(--accent-soft);
-        color: var(--accent-strong);
-        font-size: 0.9rem;
-        font-weight: 700;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-      }
-
-      h1,
-      h2,
-      h3 {
-        margin: 0 0 12px;
-        font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
-        line-height: 1.1;
-      }
-
-      h1 {
-        max-width: 11ch;
-        font-size: clamp(2.8rem, 7vw, 5.4rem);
-      }
-
-      h2 {
-        font-size: clamp(1.7rem, 4vw, 2.4rem);
-      }
-
-      h3 {
-        font-size: 1.24rem;
-      }
-
-      .lead {
-        max-width: 62ch;
-        margin: 0 0 22px;
-        color: var(--muted);
-        font-size: 1.08rem;
-      }
-
-      .hero-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1.6fr) minmax(260px, 0.95fr);
-        gap: 24px;
-        align-items: end;
-      }
-
-      .hero-panel,
-      .callout,
-      .api-card,
-      .mini-card,
-      .toc {
-        border: 1px solid var(--line);
-        border-radius: var(--radius);
-        background: var(--surface);
-        backdrop-filter: blur(10px);
-      }
-
-      .hero-panel {
-        padding: 20px;
-      }
-
-      .hero-panel p {
-        margin: 0 0 10px;
-      }
-
-      .chip-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 20px;
-      }
-
-      .chip {
-        padding: 9px 12px;
-        border-radius: 999px;
-        border: 1px solid rgba(21, 94, 117, 0.16);
-        background: rgba(255, 255, 255, 0.68);
+      pre {
+        margin: 12px 0 16px;
+        padding: 14px 16px;
+        overflow-x: auto;
+        border: 1px solid var(--code-border);
+        background: var(--code-bg);
+        color: var(--ink);
+        white-space: pre-wrap;
+        line-height: 1.55;
         font-size: 0.95rem;
       }
 
-      .layout {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) 300px;
-        gap: 28px;
-        margin-top: 28px;
+      pre code {
+        padding: 0;
+        background: transparent;
+        color: inherit;
       }
 
-      .content {
-        min-width: 0;
+      pre .kw {
+        color: var(--tok-key);
       }
 
-      .sidebar {
-        position: sticky;
-        top: 20px;
-        align-self: start;
+      pre .type {
+        color: var(--tok-type);
       }
 
-      .toc {
-        padding: 18px 18px 14px;
-        box-shadow: var(--shadow);
+      pre .call {
+        color: var(--tok-call);
       }
 
-      .toc h3 {
-        margin-bottom: 8px;
+      pre .mod {
+        color: var(--tok-mod);
       }
 
-      .toc a {
-        display: block;
-        padding: 7px 0;
-        color: var(--text);
-        text-decoration: none;
+      pre .param {
+        color: var(--tok-param);
       }
 
-      .toc a:hover {
-        color: var(--accent-strong);
+      pre .str {
+        color: var(--tok-str);
       }
 
-      section {
-        margin-top: 28px;
+      pre .num {
+        color: var(--tok-num);
       }
 
-      .section-head {
-        margin-bottom: 18px;
+      pre .comment {
+        color: var(--tok-comment);
+        font-style: italic;
       }
 
-      .section-head p {
-        margin: 0;
-        color: var(--muted);
-      }
-
-      .callout {
-        padding: 18px 20px;
-      }
-
-      .callout strong {
-        color: var(--accent-strong);
-      }
-
-      .api-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 18px;
-      }
-
-      .api-card {
-        padding: 18px;
-        box-shadow: var(--shadow);
-      }
-
-      .api-card p,
-      .api-card ul {
-        margin: 0 0 12px;
-      }
-
-      .api-card ul {
-        padding-left: 18px;
-      }
-
-      .label {
-        display: inline-block;
+      .meta {
         margin-bottom: 10px;
-        padding: 6px 10px;
-        border-radius: 999px;
-        background: rgba(21, 94, 117, 0.09);
-        color: var(--accent-strong);
-        font-size: 0.84rem;
-        font-weight: 700;
+        color: var(--muted);
+        font-size: 0.98rem;
         letter-spacing: 0.03em;
         text-transform: uppercase;
       }
 
-      pre {
-        margin: 12px 0 0;
-        padding: 14px 16px;
-        overflow-x: auto;
-        border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        background: var(--code-bg);
-        color: var(--code-text);
-        font-size: 0.92rem;
-      }
-
-      .mini-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 16px;
-      }
-
-      .mini-card {
-        padding: 16px;
-      }
-
-      .mini-card ul {
-        margin: 0;
-        padding-left: 18px;
-      }
-
-      .note {
-        margin-top: 12px;
+      .lead {
+        max-width: 60ch;
         color: var(--muted);
-        font-size: 0.94rem;
+        font-size: 1.12rem;
       }
 
-      .footer {
-        margin-top: 40px;
-        padding: 18px 0 0;
+      .toc,
+      .section-nav {
+        margin-top: 22px;
         color: var(--muted);
-        font-size: 0.95rem;
       }
 
-      @media (max-width: 980px) {
-        .hero-grid,
-        .layout {
-          grid-template-columns: 1fr;
+      .toc strong,
+      .section-nav strong {
+        color: var(--ink);
+      }
+
+      .toc a,
+      .section-nav a {
+        margin-right: 14px;
+        white-space: nowrap;
+      }
+
+      .params,
+      .note-list,
+      .signature-list {
+        color: var(--muted);
+      }
+
+      @media (max-width: 640px) {
+        body {
+          font-size: 17px;
         }
 
-        .sidebar {
-          position: static;
+        main {
+          padding-top: 42px;
+          padding-bottom: 58px;
         }
 
-        h1 {
-          max-width: none;
+        .toc a,
+        .section-nav a {
+          display: inline-block;
+          margin-bottom: 6px;
         }
       }
     </style>
   </head>
   <body>
-    <div class="shell">
-      <header class="hero">
-        <div class="hero-grid">
-          <div>
-            <p class="eyebrow">Learnify API Reference</p>
-            <h1>Readable machine learning from scratch.</h1>
-            <p class="lead">
-              Learnify is a didactic Python library for machine learning and deep learning built
-              with raw Python and NumPy. This page documents the current public API that is
-              exported from <code>learnify</code> and meant to be easy to publish with GitHub
-              Pages.
-            </p>
-            <div class="chip-row">
-              <span class="chip">Version 0.1.0</span>
-              <span class="chip">Python &gt;= 3.11</span>
-              <span class="chip">NumPy-backed models</span>
-              <span class="chip">Matplotlib plotting helpers</span>
-            </div>
-          </div>
-          <aside class="hero-panel">
-            <p><strong>Main export:</strong> <code>from learnify import ...</code></p>
-            <p><strong>Core areas:</strong> autodiff, visualization, optimization, metrics, ML, NN</p>
-            <p><strong>GitHub Pages:</strong> publish the repository's <code>docs/</code> folder.</p>
-            <pre><code>uv sync --dev</code></pre>
-          </aside>
-        </div>
+    <main id="top">
+      <header>
+        <p class="meta">Learnify 0.1.0</p>
+        <h1>Learnify API Overview</h1>
+        <p class="lead">
+          Learnify is a didactic Python library for machine learning and deep learning built with
+          raw Python and NumPy. This page is a plain reference for the current public API exported
+          from <code>learnify</code>.
+        </p>
+        <nav class="toc" aria-label="Table of contents">
+          <strong>Contents:</strong>
+          <a href="#overview">Overview</a>
+          <a href="#install">Install</a>
+          <a href="#core">Core API</a>
+          <a href="#utilities">Utilities</a>
+          <a href="#models">Models</a>
+          <a href="#plotting">Plotting</a>
+          <a href="#notes">Notes</a>
+        </nav>
       </header>
 
-      <div class="layout">
-        <main class="content">
-          <section id="overview">
-            <div class="section-head">
-              <h2>Overview</h2>
-              <p>
-                The public API is intentionally small and study-friendly. Models expose familiar
-                <code>fit</code>, <code>predict</code>, and sometimes <code>predict_proba</code>
-                methods, while the autodiff stack centers on a single scalar <code>Value</code>
-                type.
-              </p>
-            </div>
-            <div class="callout">
-              <strong>Top-level imports</strong><br />
-              <code>
-                Value</code>, <code>GradientDescentOptimizer</code>,
-                <code>gradient_descent_step</code>, <code>computation_graph_svg</code>,
-                <code>computation_graph_dot</code>, <code>save_computation_graph_svg</code>,
-                <code>trace_graph</code>, <code>mean_squared_error</code>,
-                <code>accuracy_score</code>, <code>r2_score</code>, <code>rng</code>,
-                <code>plotting</code>, <code>LinearRegressionGD</code>,
-                <code>LogisticRegressionGD</code>, <code>DecisionTreeClassifier</code>,
-                <code>RandomForestClassifier</code>, <code>LinearSVM</code>,
-                <code>KMeans</code>, <code>AgglomerativeClustering</code>, and <code>MLP</code>.
-            </div>
-          </section>
+      <section id="overview">
+        <h2>Overview</h2>
+        <p>
+          The public surface is intentionally small and readable. Most models follow familiar
+          <code>fit</code> and <code>predict</code> patterns, while the autodiff system centers on
+          a single scalar <code>Value</code> type.
+        </p>
+        <p>Top-level exports:</p>
+        <pre><code><span class="type">Value</span>
+<span class="type">GradientDescentOptimizer</span>
+<span class="call">gradient_descent_step</span>
+<span class="call">trace_graph</span>
+<span class="call">computation_graph_svg</span>
+<span class="call">save_computation_graph_svg</span>
+<span class="call">computation_graph_dot</span>
+<span class="call">mean_squared_error</span>
+<span class="call">accuracy_score</span>
+<span class="call">r2_score</span>
+<span class="mod">rng</span>
+<span class="mod">plotting</span>
+<span class="type">LinearRegressionGD</span>
+<span class="type">LogisticRegressionGD</span>
+<span class="type">DecisionTreeClassifier</span>
+<span class="type">RandomForestClassifier</span>
+<span class="type">LinearSVM</span>
+<span class="type">KMeans</span>
+<span class="type">AgglomerativeClustering</span>
+<span class="type">MLP</span></code></pre>
+        <p>Reading the signatures:</p>
+        <ul class="signature-list">
+          <li><code>X</code> means a feature array, usually shaped <code>(n_samples, n_features)</code>.</li>
+          <li><code>y</code> means targets or class labels.</li>
+          <li><code>fit(...)</code> returns the fitted model instance unless noted otherwise.</li>
+          <li>Names ending in <code>_</code> are learned or generated after fitting.</li>
+          <li><code>ax=None</code> means you may pass an existing Matplotlib axis, or let Learnify create one.</li>
+        </ul>
+        <p class="section-nav"><a href="#top">Back to contents</a> <a href="#install">Next: Install</a></p>
+      </section>
 
-          <section id="quickstart">
-            <div class="section-head">
-              <h2>Install And Quick Start</h2>
-              <p>
-                Learnify targets modern Python and keeps setup minimal for local experiments,
-                notebooks, and teaching examples.
-              </p>
-            </div>
-            <div class="api-grid">
-              <article class="api-card">
-                <span class="label">Install</span>
-                <pre><code>uv sync --dev</code></pre>
-                <p class="note">Runtime dependencies include <code>numpy</code> and <code>matplotlib</code>.</p>
-              </article>
-              <article class="api-card">
-                <span class="label">Computation Graph</span>
-                <pre><code>from learnify import Value, computation_graph_svg
+      <section id="install">
+        <h2>Install</h2>
+        <pre><code><span class="call">uv</span> <span class="call">sync</span> --dev</code></pre>
+        <ul class="params">
+          <li><code>uv sync --dev</code> installs the package and development dependencies for local work.</li>
+        </ul>
+        <p>Quick start:</p>
+        <pre><code><span class="kw">from</span> <span class="mod">learnify</span> <span class="kw">import</span> <span class="type">Value</span>, <span class="call">computation_graph_svg</span>
 
-x = Value(2.0, label="x")
-y = Value(-3.0, label="y")
-z = ((x * y) + 4.0).tanh()
-z.label = "z"
+x = <span class="type">Value</span>(<span class="num">2.0</span>, label=<span class="str">"x"</span>)
+y = <span class="type">Value</span>(<span class="num">-3.0</span>, label=<span class="str">"y"</span>)
+z = ((x * y) + <span class="num">4.0</span>).<span class="call">tanh</span>()
+z.label = <span class="str">"z"</span>
 
-z.backward()
-svg = computation_graph_svg(z)</code></pre>
-              </article>
-            </div>
-          </section>
+z.<span class="call">backward</span>()
+svg = <span class="call">computation_graph_svg</span>(z)</code></pre>
+        <ul class="params">
+          <li><code>x</code> and <code>y</code> are scalar autodiff nodes.</li>
+          <li><code>z</code> is a derived output node built from earlier operations.</li>
+          <li><code>backward()</code> computes gradients from <code>z</code> through the graph.</li>
+          <li><code>computation_graph_svg(z)</code> returns an SVG string for the graph rooted at <code>z</code>.</li>
+        </ul>
+        <p class="section-nav"><a href="#top">Back to contents</a> <a href="#core">Next: Core API</a></p>
+      </section>
 
-          <section id="autodiff">
-            <div class="section-head">
-              <h2>Autodiff And Graph Utilities</h2>
-              <p>
-                Scalar reverse-mode autodiff powers the neural-network components and the graph
-                visualization helpers.
-              </p>
-            </div>
-            <div class="api-grid">
-              <article class="api-card">
-                <span class="label">Class</span>
-                <h3>Value</h3>
-                <p>A scalar node in a computation graph.</p>
-                <pre><code>Value(data, _children=(), op="", label="")</code></pre>
-                <ul>
-                  <li><code>exp()</code>, <code>tanh()</code>, <code>relu()</code>, and <code>sigmoid()</code> create derived nodes.</li>
-                  <li><code>topo()</code> returns a topologically ordered list of connected nodes.</li>
-                  <li><code>zero_grad()</code> clears gradients across the reachable graph.</li>
-                  <li><code>backward(grad=1.0)</code> runs reverse-mode backpropagation from the current node.</li>
-                </ul>
-              </article>
-              <article class="api-card">
-                <span class="label">Functions</span>
-                <h3>Graph Rendering</h3>
-                <pre><code>trace_graph(root) -&gt; (nodes, edges)
-computation_graph_svg(root, *, node_width=200, node_height=94, horizontal_gap=64, vertical_gap=28, padding=24) -&gt; str
-save_computation_graph_svg(root, path, **kwargs) -&gt; Path
-computation_graph_dot(root) -&gt; str</code></pre>
-                <ul>
-                  <li><code>trace_graph</code> walks the graph from leaves to a root value.</li>
-                  <li><code>computation_graph_svg</code> returns a self-contained SVG string.</li>
-                  <li><code>save_computation_graph_svg</code> writes that SVG to disk and returns the output path.</li>
-                  <li><code>computation_graph_dot</code> exports a Graphviz DOT view of the same graph.</li>
-                </ul>
-              </article>
-              <article class="api-card">
-                <span class="label">Optimization</span>
-                <h3>Gradient Descent</h3>
-                <pre><code>gradient_descent_step(parameters, gradients, learning_rate) -&gt; None
-GradientDescentOptimizer(learning_rate=0.01)</code></pre>
-                <ul>
-                  <li><code>step_values(parameters)</code> updates a sequence of <code>Value</code> parameters in place.</li>
-                  <li><code>zero_grad(parameters)</code> clears stored gradients on those values.</li>
-                  <li><code>step_arrays(parameters, gradients)</code> applies the same logic to NumPy arrays.</li>
-                </ul>
-              </article>
-            </div>
-          </section>
+      <section id="core">
+        <h2>Core API</h2>
 
-          <section id="utilities">
-            <div class="section-head">
-              <h2>Metrics And RNG</h2>
-              <p>
-                Small utility functions round out the public surface for evaluation and reproducible
-                sampling.
-              </p>
-            </div>
-            <div class="mini-grid">
-              <article class="mini-card">
-                <h3>Metrics</h3>
-                <pre><code>mean_squared_error(y_true, y_pred) -&gt; float
-accuracy_score(y_true, y_pred) -&gt; float
-r2_score(y_true, y_pred) -&gt; float</code></pre>
-              </article>
-              <article class="mini-card">
-                <h3>RNG Module</h3>
-                <pre><code>learnify.rng.seed(value) -&gt; None
-learnify.rng.rand(*shape) -&gt; np.ndarray
-learnify.rng.normal(loc=0.0, scale=1.0, size=None) -&gt; np.ndarray
-learnify.rng.integers(low, high=None, size=None) -&gt; np.ndarray
-learnify.rng.choice(a, size=None, replace=True, p=None) -&gt; np.ndarray</code></pre>
-                <p class="note">These helpers use Learnify's own NumPy generator instead of NumPy's global RNG state.</p>
-              </article>
-            </div>
-          </section>
+        <h3>Value</h3>
+        <p>A scalar node in a computation graph.</p>
+        <pre><code><span class="type">Value</span>(<span class="param">data</span>, <span class="param">_children</span>=(), <span class="param">op</span>=<span class="str">""</span>, <span class="param">label</span>=<span class="str">""</span>)</code></pre>
+        <ul class="params">
+          <li><code>data</code>: the scalar value stored in the node.</li>
+          <li><code>_children</code>: parent nodes used internally to trace the graph.</li>
+          <li><code>op</code>: a short operation label such as <code>"+"</code> or <code>"tanh"</code>.</li>
+          <li><code>label</code>: optional display text for graph output and debugging.</li>
+        </ul>
+        <pre><code><span class="call">exp</span>() -&gt; <span class="type">Value</span>
+<span class="call">tanh</span>() -&gt; <span class="type">Value</span>
+<span class="call">relu</span>() -&gt; <span class="type">Value</span>
+<span class="call">sigmoid</span>() -&gt; <span class="type">Value</span>
+<span class="call">topo</span>() -&gt; list[<span class="type">Value</span>]
+<span class="call">zero_grad</span>() -&gt; <span class="kw">None</span>
+<span class="call">backward</span>(<span class="param">grad</span>=<span class="num">1.0</span>) -&gt; <span class="kw">None</span></code></pre>
+        <ul class="params">
+          <li><code>exp()</code>, <code>tanh()</code>, <code>relu()</code>, and <code>sigmoid()</code> each return a new derived <code>Value</code>.</li>
+          <li><code>topo()</code> returns the connected graph in topological order.</li>
+          <li><code>zero_grad()</code> clears gradients across the reachable graph.</li>
+          <li><code>grad</code> in <code>backward(grad=1.0)</code> is the incoming output gradient and defaults to <code>1.0</code>.</li>
+        </ul>
 
-          <section id="models">
-            <div class="section-head">
-              <h2>Models</h2>
-              <p>
-                Learnify includes gradient-descent regressors, classical classifiers, clustering
-                algorithms, and a small multilayer perceptron.
-              </p>
-            </div>
-            <div class="api-grid">
-              <article class="api-card">
-                <span class="label">Regression</span>
-                <h3>LinearRegressionGD</h3>
-                <p>Linear regression optimized with full-batch gradient descent.</p>
-                <pre><code>LinearRegressionGD(learning_rate=0.01, n_iterations=1000, fit_intercept=True)
-fit(X, y) -&gt; LinearRegressionGD
-predict(X) -&gt; np.ndarray
-score(X, y) -&gt; float</code></pre>
-                <p class="note">
-                  After fitting, the model exposes <code>weights_</code>, <code>bias_</code>, and
-                  <code>loss_history_</code>.
-                </p>
-              </article>
-              <article class="api-card">
-                <span class="label">Classification</span>
-                <h3>LogisticRegressionGD</h3>
-                <p>Binary logistic regression trained with gradient descent.</p>
-                <pre><code>LogisticRegressionGD(learning_rate=0.1, n_iterations=1000, l2=0.0)
-fit(X, y) -&gt; LogisticRegressionGD
-decision_function(X) -&gt; np.ndarray
-predict_proba(X) -&gt; np.ndarray
-predict(X, threshold=0.5) -&gt; np.ndarray</code></pre>
-                <p class="note">
-                  Learns <code>classes_</code>, <code>weights_</code>, <code>bias_</code>, and
-                  <code>loss_history_</code>. Only binary classification is supported.
-                </p>
-              </article>
-              <article class="api-card">
-                <span class="label">Classification</span>
-                <h3>DecisionTreeClassifier</h3>
-                <p>A small CART-style classifier for numeric features.</p>
-                <pre><code>DecisionTreeClassifier(max_depth=None, min_samples_split=2, max_features=None, random_state=None)
-fit(X, y) -&gt; DecisionTreeClassifier
-predict(X) -&gt; np.ndarray
-predict_proba(X) -&gt; np.ndarray</code></pre>
-                <p class="note">
-                  Fitted attributes include <code>classes_</code>, <code>root_</code>,
-                  <code>depth_</code>, <code>n_leaves_</code>, <code>feature_importances_</code>,
-                  and <code>n_features_in_</code>.
-                </p>
-              </article>
-              <article class="api-card">
-                <span class="label">Ensemble</span>
-                <h3>RandomForestClassifier</h3>
-                <p>Bootstrap aggregation of decision trees.</p>
-                <pre><code>RandomForestClassifier(n_estimators=10, max_depth=None, min_samples_split=2, max_features="sqrt", bootstrap=True, random_state=None)
-fit(X, y) -&gt; RandomForestClassifier
-predict_proba(X) -&gt; np.ndarray
-predict(X) -&gt; np.ndarray</code></pre>
-                <p class="note">
-                  Fitted objects expose <code>trees_</code>, <code>estimators_</code>,
-                  <code>feature_importances_</code>, <code>classes_</code>, and
-                  <code>n_features_in_</code>.
-                </p>
-              </article>
-              <article class="api-card">
-                <span class="label">Classification</span>
-                <h3>LinearSVM</h3>
-                <p>A linear SVM trained with subgradient descent on hinge loss.</p>
-                <pre><code>LinearSVM(learning_rate=0.01, regularization=0.01, epochs=1000)
-fit(X, y) -&gt; LinearSVM
-decision_function(X) -&gt; np.ndarray
-predict(X) -&gt; np.ndarray</code></pre>
-                <p class="note">
-                  Fitted attributes include <code>weights_</code>, <code>bias_</code>,
-                  <code>classes_</code>, and <code>loss_history_</code>. Only binary
-                  classification is supported.
-                </p>
-              </article>
-              <article class="api-card">
-                <span class="label">Clustering</span>
-                <h3>KMeans</h3>
-                <p>A didactic implementation of Lloyd's algorithm.</p>
-                <pre><code>KMeans(n_clusters=2, max_iter=100, tol=1e-4, random_state=None)
-fit(X) -&gt; KMeans
-fit_predict(X) -&gt; np.ndarray
-predict(X) -&gt; np.ndarray</code></pre>
-                <p class="note">
-                  After fitting, use <code>cluster_centers_</code>, <code>labels_</code>, and
-                  <code>inertia_</code>.
-                </p>
-              </article>
-              <article class="api-card">
-                <span class="label">Clustering</span>
-                <h3>AgglomerativeClustering</h3>
-                <p>Naive hierarchical clustering for small educational datasets.</p>
-                <pre><code>AgglomerativeClustering(n_clusters=2, linkage="average")
-fit(X) -&gt; AgglomerativeClustering
-fit_predict(X) -&gt; np.ndarray</code></pre>
-                <p class="note">
-                  Fitted attributes include <code>labels_</code>, <code>clusters_</code>,
-                  <code>children_</code>, and <code>distances_</code>.
-                </p>
-              </article>
-              <article class="api-card">
-                <span class="label">Neural Network</span>
-                <h3>MLP</h3>
-                <p>A simple MLP using tanh hidden activations and MSE training.</p>
-                <pre><code>MLP(n_inputs, layer_sizes, seed=None)
-parameters() -&gt; list[Value]
-fit(X, y, *, epochs=100, learning_rate=0.05) -&gt; list[float]
-predict(X) -&gt; np.ndarray</code></pre>
-                <p class="note">
-                  Instances are callable for forward passes, and fitted models expose
-                  <code>loss_history_</code>, <code>n_inputs_</code>, <code>layer_sizes_</code>,
-                  and <code>layers</code>.
-                </p>
-              </article>
-            </div>
-          </section>
+        <h3>Graph Utilities</h3>
+        <pre><code><span class="call">trace_graph</span>(<span class="param">root</span>) -&gt; (nodes, edges)
+<span class="call">computation_graph_svg</span>(<span class="param">root</span>, *, <span class="param">node_width</span>=<span class="num">200</span>, <span class="param">node_height</span>=<span class="num">94</span>, <span class="param">horizontal_gap</span>=<span class="num">64</span>, <span class="param">vertical_gap</span>=<span class="num">28</span>, <span class="param">padding</span>=<span class="num">24</span>) -&gt; <span class="type">str</span>
+<span class="call">save_computation_graph_svg</span>(<span class="param">root</span>, <span class="param">path</span>, **<span class="param">kwargs</span>) -&gt; <span class="type">Path</span>
+<span class="call">computation_graph_dot</span>(<span class="param">root</span>) -&gt; <span class="type">str</span></code></pre>
+        <ul class="params">
+          <li><code>root</code>: the output <code>Value</code> to trace or render.</li>
+          <li><code>path</code>: destination file path when saving an SVG.</li>
+          <li><code>node_width</code> and <code>node_height</code>: dimensions of each rendered node box.</li>
+          <li><code>horizontal_gap</code> and <code>vertical_gap</code>: spacing between nodes and layers.</li>
+          <li><code>padding</code>: outer margin around the SVG drawing.</li>
+          <li><code>kwargs</code>: forwarded from <code>save_computation_graph_svg()</code> into <code>computation_graph_svg()</code>.</li>
+        </ul>
 
-          <section id="plotting">
-            <div class="section-head">
-              <h2>Plotting Module</h2>
-              <p>
-                Import plotting helpers from <code>learnify.plotting</code>. Every public function
-                returns a Matplotlib <code>Figure</code>.
-              </p>
-            </div>
-            <div class="api-grid">
-              <article class="api-card">
-                <span class="label">Training And Linear Models</span>
-                <pre><code>plot_loss_curve(loss_history, *, ax=None, title="Training loss")
-plot_linear_coefficients(model, *, ax=None, feature_names=None, title="Weights and bias")
-plot_regression_fit(model, X, y, *, ax=None, feature_name="x", target_name="y", title="Linear regression fit")
-plot_binary_decision_surface(model, X, y, *, ax=None, feature_names=None, response="decision", title="Decision surface")
-plot_discriminant_function(model, X, y=None, *, ax=None, feature_names=None, title="Discriminant function")</code></pre>
-              </article>
-              <article class="api-card">
-                <span class="label">Trees And Forests</span>
-                <pre><code>plot_decision_tree(tree, *, ax=None, feature_names=None, class_names=None, title="Decision tree")
-plot_tree_feature_importances(tree, *, ax=None, feature_names=None, title="Decision tree feature importance")
-plot_random_forest_feature_importances(forest, *, ax=None, feature_names=None, title="Random forest feature importance")
-plot_random_forest(forest, *, feature_names=None, class_names=None, max_trees=4, title="Random forest overview")</code></pre>
-              </article>
-              <article class="api-card">
-                <span class="label">Clustering</span>
-                <pre><code>plot_kmeans_clusters(model, X, *, ax=None, feature_names=None, title="KMeans clustering")
-plot_agglomerative_clusters(model, X, *, ax=None, feature_names=None, title="Agglomerative clustering")
-plot_agglomerative_dendrogram(model, *, ax=None, leaf_labels=None, title="Agglomerative merge diagram")</code></pre>
-              </article>
-              <article class="api-card">
-                <span class="label">Neural Networks</span>
-                <pre><code>plot_mlp_architecture(model, *, ax=None, title="MLP architecture")
-plot_mlp_weight_matrices(model, *, title="MLP weight matrices")
-plot_mlp_predictions(model, X, y, *, ax=None, feature_name="x", target_name="y", title="MLP regression fit")</code></pre>
-              </article>
-            </div>
-          </section>
+        <h3>Optimization</h3>
+        <pre><code><span class="call">gradient_descent_step</span>(<span class="param">parameters</span>, <span class="param">gradients</span>, <span class="param">learning_rate</span>) -&gt; <span class="kw">None</span>
+<span class="type">GradientDescentOptimizer</span>(<span class="param">learning_rate</span>=<span class="num">0.01</span>)
 
-          <section id="notes">
-            <div class="section-head">
-              <h2>Usage Notes</h2>
-              <p>These details are useful when integrating Learnify into examples or teaching material.</p>
-            </div>
-            <div class="mini-grid">
-              <article class="mini-card">
-                <h3>Input Conventions</h3>
-                <ul>
-                  <li>Most model APIs accept NumPy arrays and reshape one-dimensional feature arrays into column vectors.</li>
-                  <li><code>LogisticRegressionGD</code> and <code>LinearSVM</code> currently support binary classification only.</li>
-                  <li>Several plotting helpers assume one or two input features, depending on the chart type.</li>
-                </ul>
-              </article>
-              <article class="mini-card">
-                <h3>Educational Focus</h3>
-                <ul>
-                  <li>Implementations favor readability over scikit-learn compatibility or production optimizations.</li>
-                  <li>Many fitted models expose intermediate artifacts such as loss histories, feature importances, and merge traces.</li>
-                  <li>The autodiff engine is scalar-first, which keeps the internals easy to inspect and visualize.</li>
-                </ul>
-              </article>
-            </div>
-          </section>
+<span class="call">step_values</span>(<span class="param">parameters</span>) -&gt; <span class="kw">None</span>
+<span class="call">zero_grad</span>(<span class="param">parameters</span>) -&gt; <span class="kw">None</span>
+<span class="call">step_arrays</span>(<span class="param">parameters</span>, <span class="param">gradients</span>) -&gt; <span class="kw">None</span></code></pre>
+        <ul class="params">
+          <li><code>parameters</code>: the arrays or <code>Value</code> objects to update.</li>
+          <li><code>gradients</code>: gradient arrays aligned with the array parameters.</li>
+          <li><code>learning_rate</code>: the gradient descent step size.</li>
+          <li><code>step_values()</code> updates autodiff parameters in place.</li>
+          <li><code>zero_grad()</code> clears gradients on a sequence of <code>Value</code> parameters.</li>
+          <li><code>step_arrays()</code> applies the same update rule to NumPy arrays.</li>
+        </ul>
+        <p class="section-nav"><a href="#top">Back to contents</a> <a href="#utilities">Next: Utilities</a></p>
+      </section>
 
-          <p class="footer">
-            Built from the current Learnify source tree. For GitHub Pages, publish the
-            <code>docs/</code> directory from your default branch.
-          </p>
-        </main>
+      <section id="utilities">
+        <h2>Utilities</h2>
 
-        <aside class="sidebar">
-          <nav class="toc">
-            <h3>On This Page</h3>
-            <a href="#overview">Overview</a>
-            <a href="#quickstart">Install And Quick Start</a>
-            <a href="#autodiff">Autodiff And Graph Utilities</a>
-            <a href="#utilities">Metrics And RNG</a>
-            <a href="#models">Models</a>
-            <a href="#plotting">Plotting Module</a>
-            <a href="#notes">Usage Notes</a>
-          </nav>
-        </aside>
-      </div>
-    </div>
+        <h3>Metrics</h3>
+        <pre><code><span class="call">mean_squared_error</span>(<span class="param">y_true</span>, <span class="param">y_pred</span>) -&gt; <span class="type">float</span>
+<span class="call">accuracy_score</span>(<span class="param">y_true</span>, <span class="param">y_pred</span>) -&gt; <span class="type">float</span>
+<span class="call">r2_score</span>(<span class="param">y_true</span>, <span class="param">y_pred</span>) -&gt; <span class="type">float</span></code></pre>
+        <ul class="params">
+          <li><code>y_true</code>: expected numeric values or labels.</li>
+          <li><code>y_pred</code>: predicted numeric values or labels to compare against <code>y_true</code>.</li>
+        </ul>
+
+        <h3>RNG</h3>
+        <pre><code><span class="mod">learnify</span>.<span class="mod">rng</span>.<span class="call">seed</span>(<span class="param">value</span>) -&gt; <span class="kw">None</span>
+<span class="mod">learnify</span>.<span class="mod">rng</span>.<span class="call">rand</span>(*<span class="param">shape</span>) -&gt; <span class="type">np.ndarray</span>
+<span class="mod">learnify</span>.<span class="mod">rng</span>.<span class="call">normal</span>(<span class="param">loc</span>=<span class="num">0.0</span>, <span class="param">scale</span>=<span class="num">1.0</span>, <span class="param">size</span>=<span class="kw">None</span>) -&gt; <span class="type">np.ndarray</span>
+<span class="mod">learnify</span>.<span class="mod">rng</span>.<span class="call">integers</span>(<span class="param">low</span>, <span class="param">high</span>=<span class="kw">None</span>, <span class="param">size</span>=<span class="kw">None</span>) -&gt; <span class="type">np.ndarray</span>
+<span class="mod">learnify</span>.<span class="mod">rng</span>.<span class="call">choice</span>(<span class="param">a</span>, <span class="param">size</span>=<span class="kw">None</span>, <span class="param">replace</span>=<span class="kw">True</span>, <span class="param">p</span>=<span class="kw">None</span>) -&gt; <span class="type">np.ndarray</span></code></pre>
+        <ul class="params">
+          <li><code>value</code>: integer seed for Learnify's internal random generator.</li>
+          <li><code>*shape</code>: output dimensions for uniform random samples.</li>
+          <li><code>loc</code> and <code>scale</code>: mean and standard deviation for normal samples.</li>
+          <li><code>low</code> and <code>high</code>: lower and upper bounds for integer sampling, with <code>high</code> exclusive.</li>
+          <li><code>size</code>: output shape for <code>normal()</code>, <code>integers()</code>, or <code>choice()</code>.</li>
+          <li><code>a</code>: the source array, sequence, or integer range for <code>choice()</code>.</li>
+          <li><code>replace</code>: whether <code>choice()</code> samples with replacement.</li>
+          <li><code>p</code>: optional sampling probabilities for <code>choice()</code>.</li>
+        </ul>
+        <p class="section-nav"><a href="#top">Back to contents</a> <a href="#models">Next: Models</a></p>
+      </section>
+
+      <section id="models">
+        <h2>Models</h2>
+
+        <h3>LinearRegressionGD</h3>
+        <pre><code><span class="type">LinearRegressionGD</span>(<span class="param">learning_rate</span>=<span class="num">0.01</span>, <span class="param">n_iterations</span>=<span class="num">1000</span>, <span class="param">fit_intercept</span>=<span class="kw">True</span>)
+<span class="call">fit</span>(<span class="param">X</span>, <span class="param">y</span>) -&gt; <span class="type">LinearRegressionGD</span>
+<span class="call">predict</span>(<span class="param">X</span>) -&gt; <span class="type">np.ndarray</span>
+<span class="call">score</span>(<span class="param">X</span>, <span class="param">y</span>) -&gt; <span class="type">float</span></code></pre>
+        <ul class="params">
+          <li><code>learning_rate</code>: step size for full-batch gradient descent.</li>
+          <li><code>n_iterations</code>: number of optimization updates.</li>
+          <li><code>fit_intercept</code>: whether to learn a bias term.</li>
+          <li><code>X</code>: feature matrix for training or prediction.</li>
+          <li><code>y</code>: target values for fitting or scoring.</li>
+          <li><code>score()</code> returns the model's <code>R^2</code> value.</li>
+        </ul>
+        <ul class="note-list">
+          <li>Fitted attributes include <code>weights_</code>, <code>bias_</code>, and <code>loss_history_</code>.</li>
+        </ul>
+
+        <h3>LogisticRegressionGD</h3>
+        <pre><code><span class="type">LogisticRegressionGD</span>(<span class="param">learning_rate</span>=<span class="num">0.1</span>, <span class="param">n_iterations</span>=<span class="num">1000</span>, <span class="param">l2</span>=<span class="num">0.0</span>)
+<span class="call">fit</span>(<span class="param">X</span>, <span class="param">y</span>) -&gt; <span class="type">LogisticRegressionGD</span>
+<span class="call">decision_function</span>(<span class="param">X</span>) -&gt; <span class="type">np.ndarray</span>
+<span class="call">predict_proba</span>(<span class="param">X</span>) -&gt; <span class="type">np.ndarray</span>
+<span class="call">predict</span>(<span class="param">X</span>, <span class="param">threshold</span>=<span class="num">0.5</span>) -&gt; <span class="type">np.ndarray</span></code></pre>
+        <ul class="params">
+          <li><code>learning_rate</code>: optimization step size.</li>
+          <li><code>n_iterations</code>: number of training updates.</li>
+          <li><code>l2</code>: L2 regularization strength.</li>
+          <li><code>X</code>: feature matrix for training or inference.</li>
+          <li><code>y</code>: binary class labels for fitting.</li>
+          <li><code>threshold</code>: cutoff used by <code>predict()</code> for the positive class.</li>
+        </ul>
+        <ul class="note-list">
+          <li>Fitted attributes include <code>classes_</code>, <code>weights_</code>, <code>bias_</code>, and <code>loss_history_</code>.</li>
+          <li>This implementation supports binary classification only.</li>
+        </ul>
+
+        <h3>DecisionTreeClassifier</h3>
+        <pre><code><span class="type">DecisionTreeClassifier</span>(<span class="param">max_depth</span>=<span class="kw">None</span>, <span class="param">min_samples_split</span>=<span class="num">2</span>, <span class="param">max_features</span>=<span class="kw">None</span>, <span class="param">random_state</span>=<span class="kw">None</span>)
+<span class="call">fit</span>(<span class="param">X</span>, <span class="param">y</span>) -&gt; <span class="type">DecisionTreeClassifier</span>
+<span class="call">predict</span>(<span class="param">X</span>) -&gt; <span class="type">np.ndarray</span>
+<span class="call">predict_proba</span>(<span class="param">X</span>) -&gt; <span class="type">np.ndarray</span></code></pre>
+        <ul class="params">
+          <li><code>max_depth</code>: optional limit on tree depth.</li>
+          <li><code>min_samples_split</code>: minimum number of samples required to split a node.</li>
+          <li><code>max_features</code>: feature sampling rule per split.</li>
+          <li><code>random_state</code>: seed for internal randomness.</li>
+          <li><code>X</code>: numeric feature matrix.</li>
+          <li><code>y</code>: class labels for training.</li>
+        </ul>
+        <ul class="note-list">
+          <li>Fitted attributes include <code>classes_</code>, <code>root_</code>, <code>depth_</code>, <code>n_leaves_</code>, <code>feature_importances_</code>, and <code>n_features_in_</code>.</li>
+        </ul>
+
+        <h3>RandomForestClassifier</h3>
+        <pre><code><span class="type">RandomForestClassifier</span>(<span class="param">n_estimators</span>=<span class="num">10</span>, <span class="param">max_depth</span>=<span class="kw">None</span>, <span class="param">min_samples_split</span>=<span class="num">2</span>, <span class="param">max_features</span>=<span class="str">"sqrt"</span>, <span class="param">bootstrap</span>=<span class="kw">True</span>, <span class="param">random_state</span>=<span class="kw">None</span>)
+<span class="call">fit</span>(<span class="param">X</span>, <span class="param">y</span>) -&gt; <span class="type">RandomForestClassifier</span>
+<span class="call">predict_proba</span>(<span class="param">X</span>) -&gt; <span class="type">np.ndarray</span>
+<span class="call">predict</span>(<span class="param">X</span>) -&gt; <span class="type">np.ndarray</span></code></pre>
+        <ul class="params">
+          <li><code>n_estimators</code>: number of trees in the forest.</li>
+          <li><code>max_depth</code>, <code>min_samples_split</code>, and <code>max_features</code>: tree-building controls passed to each estimator.</li>
+          <li><code>bootstrap</code>: whether each tree uses bootstrap sampling.</li>
+          <li><code>random_state</code>: seed for forest construction.</li>
+          <li><code>X</code>: feature matrix.</li>
+          <li><code>y</code>: class labels.</li>
+        </ul>
+        <ul class="note-list">
+          <li>Fitted attributes include <code>trees_</code>, <code>estimators_</code>, <code>feature_importances_</code>, <code>classes_</code>, and <code>n_features_in_</code>.</li>
+        </ul>
+
+        <h3>LinearSVM</h3>
+        <pre><code><span class="type">LinearSVM</span>(<span class="param">learning_rate</span>=<span class="num">0.01</span>, <span class="param">regularization</span>=<span class="num">0.01</span>, <span class="param">epochs</span>=<span class="num">1000</span>)
+<span class="call">fit</span>(<span class="param">X</span>, <span class="param">y</span>) -&gt; <span class="type">LinearSVM</span>
+<span class="call">decision_function</span>(<span class="param">X</span>) -&gt; <span class="type">np.ndarray</span>
+<span class="call">predict</span>(<span class="param">X</span>) -&gt; <span class="type">np.ndarray</span></code></pre>
+        <ul class="params">
+          <li><code>learning_rate</code>: update size during optimization.</li>
+          <li><code>regularization</code>: weight penalty strength.</li>
+          <li><code>epochs</code>: number of passes through the optimization loop.</li>
+          <li><code>X</code>: feature matrix.</li>
+          <li><code>y</code>: binary class labels.</li>
+        </ul>
+        <ul class="note-list">
+          <li><code>decision_function()</code> returns signed margins before thresholding.</li>
+          <li>Fitted attributes include <code>weights_</code>, <code>bias_</code>, <code>classes_</code>, and <code>loss_history_</code>.</li>
+          <li>This implementation supports binary classification only.</li>
+        </ul>
+
+        <h3>KMeans</h3>
+        <pre><code><span class="type">KMeans</span>(<span class="param">n_clusters</span>=<span class="num">2</span>, <span class="param">max_iter</span>=<span class="num">100</span>, <span class="param">tol</span>=<span class="num">1e-4</span>, <span class="param">random_state</span>=<span class="kw">None</span>)
+<span class="call">fit</span>(<span class="param">X</span>) -&gt; <span class="type">KMeans</span>
+<span class="call">fit_predict</span>(<span class="param">X</span>) -&gt; <span class="type">np.ndarray</span>
+<span class="call">predict</span>(<span class="param">X</span>) -&gt; <span class="type">np.ndarray</span></code></pre>
+        <ul class="params">
+          <li><code>n_clusters</code>: target number of clusters.</li>
+          <li><code>max_iter</code>: maximum number of refinement steps.</li>
+          <li><code>tol</code>: convergence tolerance for center movement.</li>
+          <li><code>random_state</code>: seed for center initialization.</li>
+          <li><code>X</code>: numeric feature matrix to cluster.</li>
+        </ul>
+        <ul class="note-list">
+          <li>Fitted attributes include <code>cluster_centers_</code>, <code>labels_</code>, and <code>inertia_</code>.</li>
+        </ul>
+
+        <h3>AgglomerativeClustering</h3>
+        <pre><code><span class="type">AgglomerativeClustering</span>(<span class="param">n_clusters</span>=<span class="num">2</span>, <span class="param">linkage</span>=<span class="str">"average"</span>)
+<span class="call">fit</span>(<span class="param">X</span>) -&gt; <span class="type">AgglomerativeClustering</span>
+<span class="call">fit_predict</span>(<span class="param">X</span>) -&gt; <span class="type">np.ndarray</span></code></pre>
+        <ul class="params">
+          <li><code>n_clusters</code>: final number of clusters after merging.</li>
+          <li><code>linkage</code>: merge rule, one of <code>"single"</code>, <code>"complete"</code>, or <code>"average"</code>.</li>
+          <li><code>X</code>: numeric feature matrix to cluster.</li>
+        </ul>
+        <ul class="note-list">
+          <li>Fitted attributes include <code>labels_</code>, <code>clusters_</code>, <code>children_</code>, and <code>distances_</code>.</li>
+        </ul>
+
+        <h3>MLP</h3>
+        <pre><code><span class="type">MLP</span>(<span class="param">n_inputs</span>, <span class="param">layer_sizes</span>, <span class="param">seed</span>=<span class="kw">None</span>)
+<span class="call">parameters</span>() -&gt; list[<span class="type">Value</span>]
+<span class="call">fit</span>(<span class="param">X</span>, <span class="param">y</span>, *, <span class="param">epochs</span>=<span class="num">100</span>, <span class="param">learning_rate</span>=<span class="num">0.05</span>) -&gt; list[<span class="type">float</span>]
+<span class="call">predict</span>(<span class="param">X</span>) -&gt; <span class="type">np.ndarray</span></code></pre>
+        <ul class="params">
+          <li><code>n_inputs</code>: input width expected by the network.</li>
+          <li><code>layer_sizes</code>: sizes of hidden layers followed by the output layer.</li>
+          <li><code>seed</code>: initialization seed for network weights.</li>
+          <li><code>X</code>: training or prediction inputs.</li>
+          <li><code>y</code>: training targets.</li>
+          <li><code>epochs</code> and <code>learning_rate</code>: training loop length and step size for <code>fit()</code>.</li>
+        </ul>
+        <ul class="note-list">
+          <li><code>parameters()</code> returns the model's learnable <code>Value</code> objects.</li>
+          <li><code>fit()</code> returns the loss history across epochs.</li>
+          <li>Fitted attributes include <code>loss_history_</code>, <code>n_inputs_</code>, <code>layer_sizes_</code>, and <code>layers</code>.</li>
+        </ul>
+        <p class="section-nav"><a href="#top">Back to contents</a> <a href="#plotting">Next: Plotting</a></p>
+      </section>
+
+      <section id="plotting">
+        <h2>Plotting</h2>
+        <p>Import plotting helpers from <code>learnify.plotting</code>. Each function returns a Matplotlib <code>Figure</code>.</p>
+
+        <h3>Training And Linear Models</h3>
+        <pre><code><span class="call">plot_loss_curve</span>(<span class="param">loss_history</span>, *, <span class="param">ax</span>=<span class="kw">None</span>, <span class="param">title</span>=<span class="str">"Training loss"</span>)
+<span class="call">plot_linear_coefficients</span>(<span class="param">model</span>, *, <span class="param">ax</span>=<span class="kw">None</span>, <span class="param">feature_names</span>=<span class="kw">None</span>, <span class="param">title</span>=<span class="str">"Weights and bias"</span>)
+<span class="call">plot_regression_fit</span>(<span class="param">model</span>, <span class="param">X</span>, <span class="param">y</span>, *, <span class="param">ax</span>=<span class="kw">None</span>, <span class="param">feature_name</span>=<span class="str">"x"</span>, <span class="param">target_name</span>=<span class="str">"y"</span>, <span class="param">title</span>=<span class="str">"Linear regression fit"</span>)
+<span class="call">plot_binary_decision_surface</span>(<span class="param">model</span>, <span class="param">X</span>, <span class="param">y</span>, *, <span class="param">ax</span>=<span class="kw">None</span>, <span class="param">feature_names</span>=<span class="kw">None</span>, <span class="param">response</span>=<span class="str">"decision"</span>, <span class="param">title</span>=<span class="str">"Decision surface"</span>)
+<span class="call">plot_discriminant_function</span>(<span class="param">model</span>, <span class="param">X</span>, <span class="param">y</span>=<span class="kw">None</span>, *, <span class="param">ax</span>=<span class="kw">None</span>, <span class="param">feature_names</span>=<span class="kw">None</span>, <span class="param">title</span>=<span class="str">"Discriminant function"</span>)</code></pre>
+        <ul class="params">
+          <li><code>loss_history</code>: numeric training trace for <code>plot_loss_curve()</code>.</li>
+          <li><code>model</code>: fitted linear or binary classification estimator.</li>
+          <li><code>X</code> and <code>y</code>: data to visualize.</li>
+          <li><code>ax</code>: optional existing Matplotlib axis.</li>
+          <li><code>feature_names</code>, <code>feature_name</code>, <code>target_name</code>, and <code>title</code>: display labels.</li>
+          <li><code>response</code>: whether the decision-surface plot shows raw scores or probabilities.</li>
+        </ul>
+
+        <h3>Trees And Forests</h3>
+        <pre><code><span class="call">plot_decision_tree</span>(<span class="param">tree</span>, *, <span class="param">ax</span>=<span class="kw">None</span>, <span class="param">feature_names</span>=<span class="kw">None</span>, <span class="param">class_names</span>=<span class="kw">None</span>, <span class="param">title</span>=<span class="str">"Decision tree"</span>)
+<span class="call">plot_tree_feature_importances</span>(<span class="param">tree</span>, *, <span class="param">ax</span>=<span class="kw">None</span>, <span class="param">feature_names</span>=<span class="kw">None</span>, <span class="param">title</span>=<span class="str">"Decision tree feature importance"</span>)
+<span class="call">plot_random_forest_feature_importances</span>(<span class="param">forest</span>, *, <span class="param">ax</span>=<span class="kw">None</span>, <span class="param">feature_names</span>=<span class="kw">None</span>, <span class="param">title</span>=<span class="str">"Random forest feature importance"</span>)
+<span class="call">plot_random_forest</span>(<span class="param">forest</span>, *, <span class="param">feature_names</span>=<span class="kw">None</span>, <span class="param">class_names</span>=<span class="kw">None</span>, <span class="param">max_trees</span>=<span class="num">4</span>, <span class="param">title</span>=<span class="str">"Random forest overview"</span>)</code></pre>
+        <ul class="params">
+          <li><code>tree</code> and <code>forest</code>: fitted estimators to draw.</li>
+          <li><code>ax</code>: optional existing axis for the single-plot helpers.</li>
+          <li><code>feature_names</code> and <code>class_names</code>: optional display labels.</li>
+          <li><code>max_trees</code>: number of trees to show in the forest overview.</li>
+          <li><code>title</code>: figure title.</li>
+        </ul>
+
+        <h3>Clustering</h3>
+        <pre><code><span class="call">plot_kmeans_clusters</span>(<span class="param">model</span>, <span class="param">X</span>, *, <span class="param">ax</span>=<span class="kw">None</span>, <span class="param">feature_names</span>=<span class="kw">None</span>, <span class="param">title</span>=<span class="str">"KMeans clustering"</span>)
+<span class="call">plot_agglomerative_clusters</span>(<span class="param">model</span>, <span class="param">X</span>, *, <span class="param">ax</span>=<span class="kw">None</span>, <span class="param">feature_names</span>=<span class="kw">None</span>, <span class="param">title</span>=<span class="str">"Agglomerative clustering"</span>)
+<span class="call">plot_agglomerative_dendrogram</span>(<span class="param">model</span>, *, <span class="param">ax</span>=<span class="kw">None</span>, <span class="param">leaf_labels</span>=<span class="kw">None</span>, <span class="param">title</span>=<span class="str">"Agglomerative merge diagram"</span>)</code></pre>
+        <ul class="params">
+          <li><code>model</code>: fitted clustering model.</li>
+          <li><code>X</code>: data to plot for the cluster scatter views.</li>
+          <li><code>ax</code>: optional existing axis.</li>
+          <li><code>feature_names</code>: axis labels for feature dimensions.</li>
+          <li><code>leaf_labels</code>: custom sample labels for the dendrogram.</li>
+          <li><code>title</code>: figure title.</li>
+        </ul>
+
+        <h3>Neural Networks</h3>
+        <pre><code><span class="call">plot_mlp_architecture</span>(<span class="param">model</span>, *, <span class="param">ax</span>=<span class="kw">None</span>, <span class="param">title</span>=<span class="str">"MLP architecture"</span>)
+<span class="call">plot_mlp_weight_matrices</span>(<span class="param">model</span>, *, <span class="param">title</span>=<span class="str">"MLP weight matrices"</span>)
+<span class="call">plot_mlp_predictions</span>(<span class="param">model</span>, <span class="param">X</span>, <span class="param">y</span>, *, <span class="param">ax</span>=<span class="kw">None</span>, <span class="param">feature_name</span>=<span class="str">"x"</span>, <span class="param">target_name</span>=<span class="str">"y"</span>, <span class="param">title</span>=<span class="str">"MLP regression fit"</span>)</code></pre>
+        <ul class="params">
+          <li><code>model</code>: fitted <code>MLP</code> instance.</li>
+          <li><code>X</code> and <code>y</code>: data for prediction visualizations.</li>
+          <li><code>ax</code>: optional existing axis where supported.</li>
+          <li><code>feature_name</code>, <code>target_name</code>, and <code>title</code>: display labels.</li>
+        </ul>
+        <p class="section-nav"><a href="#top">Back to contents</a> <a href="#notes">Next: Notes</a></p>
+      </section>
+
+      <section id="notes">
+        <h2>Notes</h2>
+        <ul class="note-list">
+          <li>Most model APIs accept NumPy arrays and reshape one-dimensional inputs into column vectors when needed.</li>
+          <li><code>LogisticRegressionGD</code> and <code>LinearSVM</code> currently support binary classification only.</li>
+          <li>Several plotting helpers expect one or two input features, depending on the chart.</li>
+          <li>Implementations favor readability over scikit-learn compatibility or production optimizations.</li>
+        </ul>
+        <p class="section-nav"><a href="#top">Back to contents</a></p>
+      </section>
+    </main>
   </body>
 </html>
